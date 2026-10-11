@@ -1,0 +1,150 @@
+/* ================= Animations SVG ================= */
+
+/* Vapeur au-dessus des verrines du hero */
+.steam-svg{position:absolute;right:12%;bottom:34%;width:clamp(64px,17%,104px);z-index:3;pointer-events:none;overflow:visible;filter:drop-shadow(0 2px 6px rgba(31,61,43,.25))}
+.steam{stroke-dashoffset:1.55;stroke-width:4;stroke-dasharray:.55 1;opacity:0;animation:steam 4.2s ease-in-out infinite}
+.steam.s2{animation-delay:1.3s}
+.steam.s3{animation-delay:2.6s}
+@keyframes steam{
+  0%{stroke-dashoffset:1.55;opacity:0;transform:translateY(8px)}
+  25%{opacity:1}
+  70%{opacity:.5}
+  100%{stroke-dashoffset:.55;opacity:0;transform:translateY(-14px)}
+}
+
+/* Étincelles dorées */
+.sparkles{position:absolute;inset:0;pointer-events:none;z-index:2;transition:translate .6s cubic-bezier(.2,.7,.2,1)}
+.sparkles svg{position:absolute;height:auto;aspect-ratio:1;translate:-50% -50%;overflow:visible}
+.spark{fill:#E2C277;transform-origin:center;transform-box:fill-box;animation:twinkle 3.6s ease-in-out infinite;animation-delay:var(--sd,0s)}
+.sparkles svg:nth-child(2n) .spark{fill:#F3D58C;animation-duration:4.4s}
+.sparkles svg:nth-child(3n) .spark{fill:#FFF6EC;animation-duration:5.2s}
+@keyframes twinkle{
+  0%,100%{opacity:0;transform:scale(.2) rotate(0)}
+  45%{opacity:1;transform:scale(1) rotate(45deg)}
+  60%{opacity:.9;transform:scale(.85) rotate(60deg)}
+}
+.page-sparks{z-index:0}
+
+/* Souligné au pinceau sous les mots manuscrits */
+.brushed{position:relative;display:inline-block}
+.brush{position:absolute;left:-2%;right:-2%;bottom:-.12em;width:104%;height:.32em;overflow:visible;pointer-events:none}
+.brush path{fill:none;stroke:var(--gold);stroke-width:3.2;stroke-linecap:round;stroke-dasharray:1;animation:draw 1.1s cubic-bezier(.6,.1,.2,1) both;animation-delay:var(--bd,.5s)}
+.brush .b2{stroke-width:1.6;opacity:.7;animation-delay:calc(var(--bd,.5s) + .35s)}
+.page-hero .brush path{stroke:var(--gold-l)}
+@keyframes draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+
+/* Fleuron doré sous les titres */
+.flourish{width:150px;height:22px;overflow:visible;margin-top:2px}
+.flourish path{fill:none;stroke:var(--gold);stroke-width:1.4;stroke-linecap:round}
+.flourish .gem{fill:var(--gold);stroke:none;transform-origin:80px 12px;animation:gem 4s ease-in-out infinite}
+.bg-green .flourish path,.bg-coral .flourish path{stroke:var(--gold-l)}
+.bg-green .flourish .gem,.bg-coral .flourish .gem{fill:var(--gold-l)}
+@keyframes gem{0%,100%{transform:rotate(0) scale(1)}50%{transform:rotate(90deg) scale(1.25)}}
+
+/* Traits qui se dessinent à l'apparition */
+.to-draw .trace{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.3s cubic-bezier(.6,.1,.2,1) var(--td,0s)}
+.to-draw .trace-fill{fill-opacity:0;transition:stroke-dashoffset 1.3s cubic-bezier(.6,.1,.2,1) var(--td,0s),fill-opacity .6s ease calc(var(--td,0s) + .8s)}
+.to-draw.drawn .trace{stroke-dashoffset:0}
+.to-draw.drawn .trace-fill{fill-opacity:1}
+.to-draw .pop{transform-origin:center;transform-box:fill-box;transform:scale(0);transition:transform .5s cubic-bezier(.3,1.6,.5,1) var(--td,0s)}
+.to-draw.drawn .pop{transform:scale(1)}
+
+/* Anneaux des valeurs : orbite dorée */
+.values .ring{position:relative}
+.values .ring::after{content:"";position:absolute;inset:-7px;border-radius:50%;border:1.5px solid transparent;border-top-color:#FFF1DC;border-right-color:rgba(255,241,220,.35);animation:orbit 6s linear infinite}
+.values li:nth-child(2) .ring::after{animation-duration:7.5s;animation-direction:reverse}
+.values li:nth-child(3) .ring::after{animation-duration:9s}
+.values li:nth-child(4) .ring::after{animation-duration:6.8s;animation-direction:reverse}
+@keyframes orbit{to{transform:rotate(1turn)}}
+.values li:hover .ring svg{animation:wiggle .6s ease}
+@keyframes wiggle{25%{transform:rotate(-10deg) scale(1.08)}60%{transform:rotate(8deg) scale(1.08)}}
+
+/* Cœur qui bat, traits qui s'étirent */
+.heart-rule svg{animation:beat 2.4s ease-in-out infinite;transform-origin:center}
+@keyframes beat{0%,40%,100%{transform:scale(1)}10%{transform:scale(1.28)}20%{transform:scale(.96)}30%{transform:scale(1.16)}}
+.heart-rule::before,.heart-rule::after{animation:stretch 1.4s cubic-bezier(.6,.1,.2,1) both .3s}
+.heart-rule::before{transform-origin:right}
+.heart-rule::after{transform-origin:left}
+@keyframes stretch{from{transform:scaleX(0)}}
+
+/* Verre de l'apéritif : on trinque */
+.sunburst svg{overflow:visible}
+.sunburst svg path:first-child{animation:rays 2.8s ease-in-out infinite;transform-origin:35px 20px}
+.sunburst svg path:nth-child(2),.sunburst svg path:nth-child(3){animation:cheers 3.6s ease-in-out infinite;transform-origin:35px 40px}
+@keyframes rays{0%,100%{opacity:.45;transform:scale(.92)}50%{opacity:1;transform:scale(1.06)}}
+@keyframes cheers{0%,70%,100%{transform:rotate(0)}78%{transform:rotate(-7deg)}86%{transform:rotate(5deg)}93%{transform:rotate(-2deg)}}
+
+/* Pétales d'hibiscus et grains d'épices dans les bandeaux corail */
+.petals{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:visible}
+.drift{transform-box:view-box;animation:fall var(--dur,14s) linear infinite;animation-delay:var(--del,0s);opacity:.0}
+.drift > *{animation:spin calc(var(--dur,14s) / 2) ease-in-out infinite alternate}
+.drift path{transform-box:fill-box;transform-origin:center}
+@keyframes fall{
+  0%{transform:translate(calc(var(--x) * 1px),-4px);opacity:0}
+  10%{opacity:.85}
+  50%{transform:translate(calc(var(--x) * 1px + 3px),calc(var(--fall) * .5px))}
+  90%{opacity:.75}
+  100%{transform:translate(calc(var(--x) * 1px - 2px),calc(var(--fall) * 1px));opacity:0}
+}
+@keyframes spin{from{rotate:0deg}to{rotate:var(--rot,180deg)}}
+.bg-coral > .wrap,.bg-coral > .over{z-index:1}
+
+/* Cloche qui se soulève */
+.cloche{display:block;width:72px;height:auto;margin-bottom:6px;overflow:visible}
+.c-lid{transform-box:view-box;transform-origin:68px 56px;animation:lid 4.8s cubic-bezier(.5,0,.3,1) infinite}
+.c-steam{opacity:0;stroke-dasharray:12;animation:csteam 4.8s ease-in-out infinite}
+@keyframes lid{0%,18%,72%,100%{transform:none}32%,58%{transform:translate(4px,-14px) rotate(16deg)}}
+@keyframes csteam{0%,24%{opacity:0;stroke-dashoffset:12;transform:translateY(8px)}40%{opacity:1;stroke-dashoffset:0;transform:none}62%{opacity:0;transform:translateY(-8px)}100%{opacity:0}}
+
+/* Étapes reliées par un chemin pointillé */
+.steps{position:relative}
+.steps li{position:relative;z-index:1}
+.steps-path{position:absolute;left:16.6%;right:16.6%;top:6px;width:66.8%;height:60px;overflow:visible;z-index:0;pointer-events:none}
+.steps-path path{fill:none;stroke:var(--gold);stroke-width:1.6;stroke-linecap:round;stroke-dasharray:2 4;stroke-dashoffset:0;clip-path:inset(0 100% 0 0);transition:clip-path 1.8s cubic-bezier(.6,.1,.2,1);animation:march 1.6s linear infinite}
+.steps.drawn .steps-path path{clip-path:inset(0 0 0 0)}
+@keyframes march{to{stroke-dashoffset:-12}}
+.steps .num{position:relative}
+.num-ring{position:absolute;inset:-9px;width:calc(100% + 18px);height:calc(100% + 18px);overflow:visible;transform:rotate(-90deg)}
+.num-ring circle{fill:none;stroke:var(--gold);stroke-width:2;stroke-dasharray:.18 .07;animation:ringspin 12s linear infinite}
+.steps li:nth-child(2) .num-ring circle{animation-direction:reverse}
+@keyframes ringspin{to{stroke-dashoffset:-1}}
+@media (max-width: 760px){.steps-path{display:none}}
+
+/* Coche de remerciement */
+.check-anim{display:block;width:84px;height:84px;margin:0 auto 6px}
+.check-anim .ck-c{fill:none;stroke:var(--gold);stroke-width:3;stroke-dasharray:1;animation:draw .8s cubic-bezier(.6,.1,.2,1) both .1s}
+.check-anim .ck-p{fill:none;stroke:var(--green);stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;animation:draw .5s cubic-bezier(.6,.1,.2,1) both .75s}
+
+/* WhatsApp : un éclat doré fait le tour du bouton */
+.fab .wa{position:relative}
+.wa-ring{position:absolute;inset:-4px;width:calc(100% + 8px);height:calc(100% + 8px);overflow:visible;pointer-events:none}
+.wa-ring rect{fill:none;stroke:#F3D58C;stroke-width:2;stroke-linecap:round;stroke-dasharray:.12 .88;vector-effect:non-scaling-stroke;animation:ringrun 3.2s linear infinite}
+@keyframes ringrun{to{stroke-dashoffset:-1}}
+
+/* Plats mauriciens : l'hibiscus éclot au survol */
+.dish .ph svg{transition:transform .8s cubic-bezier(.3,1.4,.5,1);animation:slowspin 40s linear infinite}
+.dish:hover .ph svg{transform:scale(1.25)}
+@keyframes slowspin{to{rotate:1turn}}
+
+/* Bouquet du pied de page qui respire */
+.foot-leaf svg{transform-origin:70% 90%;animation:sway 10s ease-in-out infinite alternate}
+
+/* Page 404 : assiette vide */
+.empty-plate{width:min(220px,60vw);height:auto;overflow:visible}
+.empty-plate .plate-o{fill:#FFFCF6;stroke:var(--gold);stroke-width:2}
+.empty-plate .plate-i{fill:none;stroke:var(--line);stroke-width:2}
+.empty-plate .cutlery{fill:none;stroke:var(--green);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.empty-plate .fork{transform-box:fill-box;transform-origin:50% 100%;animation:fork 3.4s ease-in-out infinite}
+.empty-plate .knife{transform-box:fill-box;transform-origin:50% 100%;animation:fork 3.4s ease-in-out infinite reverse}
+.empty-plate .crumb{fill:var(--gold);animation:twinkle 3s ease-in-out infinite}
+.empty-plate .crumb:nth-of-type(2){animation-delay:1s}
+.empty-plate .crumb:nth-of-type(3){animation-delay:2s}
+.empty-plate .plate{transform-box:fill-box;transform-origin:center;animation:wobble 5s ease-in-out infinite}
+@keyframes fork{0%,100%{transform:rotate(-6deg)}50%{transform:rotate(6deg) translateY(-4px)}}
+@keyframes wobble{0%,100%{transform:rotate(0)}50%{transform:rotate(4deg)}}
+
+@media (prefers-reduced-motion: reduce){
+  .steam,.c-steam{display:none}
+  .steps-path path{clip-path:none}
+  .petals{display:none}
+}
