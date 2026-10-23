@@ -545,3 +545,21 @@ html{scroll-padding-top:140px}
 .logo-medal{display:inline-flex;align-items:center;justify-content:center;width:200px;height:200px;border-radius:50%;background:var(--cream);border:3px solid var(--gold);box-shadow:0 0 0 6px rgba(226,194,119,.18)}
 .logo-medal img{height:150px;width:auto}
 html{scroll-padding-top:150px}
+
+/* ================= Amélioration suite audit ================= */
+/* Des plats dès le premier écran sur téléphone */
+.hero-strip{display:none}
+@media (max-width: 920px){
+  .hero-strip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:22px}
+  .hero-strip img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:16px;border:3px solid var(--paper);box-shadow:0 8px 20px rgba(31,61,43,.16)}
+  .hero-strip img:nth-child(2){border-radius:50%}
+}
+/* Tarifs sur devis */
+.price strong{display:inline-block}
+.price-note{display:block;font-size:13px;color:var(--muted);margin-top:2px}
+.formule.star .price-note{color:var(--on-dark)}
+/* Mentions légales */
+.legal h2{font-family:var(--f-serif);font-size:28px;color:var(--green);margin:36px 0 10px}
+.legal p,.legal li{color:var(--muted)}
+.legal ul{padding-left:20px}
+.legal .todo{background:#FFF1DC;border:1px dashed var(--terra);border-radius:6px;padding:0 6px;color:var(--terra)}
